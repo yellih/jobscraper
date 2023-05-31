@@ -6,8 +6,9 @@ search_term = "python"
 
 response = get(f"{base_url}{search_term}")
 
-if response.status_code != 200:
-    print("Can't request website!")
-else:
-    soup = BeautifulSoup(response.text, "html.parser")
-    print(soup.find_all('li', class_="feature"))
+
+soup = BeautifulSoup(response.text, "html.parser")
+section = soup.find_all('section',class_="jobs")
+for ul in section:
+    view = ul.find_all('li' > 'a')
+    print(view[-1]['href'])
