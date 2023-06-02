@@ -1,9 +1,9 @@
 from requests import get
 from bs4 import BeautifulSoup
 
-wwr_url = "https://weworkremotely.com/"
+wwr_url = "https://weworkremotely.com"
 search_url = "https://weworkremotely.com/remote-jobs/search?utf8=%E2%9C%93&term="
-search_term = "react"
+search_term = "python"
 view_all_url = ""
 
 search_url_response = get(f"{search_url}{search_term}")
@@ -23,7 +23,7 @@ else:
             # print(view_all_url)
         
 view_all_url_response = get(f"{wwr_url}{view_all_url}")
-# print(view_all_url_response)
+# print(f"{wwr_url}{view_all_url}")
 
 if view_all_url_response.status_code != 200:
     print("Can't request website")
@@ -31,18 +31,21 @@ else:
     results = []
     soup = BeautifulSoup(view_all_url_response.text, "html.parser")
     section = soup.find_all('section',class_="jobs")
-    # print(section2)
+    # print(section)
     for ul in section:
         li = ul.find_all('li')
         # print(li)
         # print(len(li))
         li.pop(-1)
+        li.pop(0)
+        # print(li)
         for post in li:
             anchors = post.find_all('a')
             # print(anchors)
             anchor = anchors[1]
-            link = anchor['href']
             # print(anchor)
+            link = anchor['href']
+            # print(link)
             company, kind, region = anchor.find_all('span', class_="company")
             # print(company,kind, region)
             title = anchor.find('span', class_='title')
