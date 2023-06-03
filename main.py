@@ -19,4 +19,10 @@ if get(f"{search_url}{search_term}").status_code == 200:
     print("Request Success!")
 else:
     browser.get(f"{search_url}{search_term}")
-    print(browser.page_source)
+    soup = BeautifulSoup(browser.page_source, "html.parser")
+    job_list = soup.find("ul", class_="jobsearch-ResultsList")
+    jobs = job_list.find_all("li", recursive=False)
+    # print(len(jobs))
+    for job in jobs:
+        print(job)
+        print("//")
