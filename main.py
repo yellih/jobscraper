@@ -11,3 +11,5 @@ service = Service(ChromeDriverManager().install())
 browser = webdriver.Chrome(service=service,options=options)
 
 browser.get("https://kr.indeed.com/jobs?q=python")
+
+print(browser.page_source)
