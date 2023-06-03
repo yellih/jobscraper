@@ -47,13 +47,13 @@ def extract_wwr_jobs(keyword):
                 # print(anchor)
                 link = anchor['href']
                 # print(link)
-                company, kind, region = anchor.find_all('span', class_="company")
-                # print(company,kind, region)
+                company, kind, location = anchor.find_all('span', class_="company")
+                # print(company,kind, location)
                 title = anchor.find('span', class_='title')
                 job_data = {
                     'link':home_url+link,
                     'company': company.string,
-                    'region': region.string,
+                    'location': location.string,
                     'position': title.string
                 }
                 results.append(job_data)
