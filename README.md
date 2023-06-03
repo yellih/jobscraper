@@ -15,3 +15,5 @@ weworkremotely 스크린샷 2 (2023.06.03)
 
 indeed 스크린샷 (2023.06.03)
 ![screencapture-kr-indeed-jobs-2023-06-03-12_52_02](https://github.com/yellih/jobscraper/assets/127484092/b904bf6c-fc42-47d0-8489-433983d06681)
+
+출처 노마드코더 - Python으로 웹 스크래퍼 만들기 (https://nomadcoders.co/python-for-beginners/lobby)
