@@ -24,5 +24,8 @@ else:
     jobs = job_list.find_all("li", recursive=False)
     # print(len(jobs))
     for job in jobs:
-        print(job)
-        print("//")
+        zone = job.find("div",class_="mosaic-zone")
+        if zone == None:
+            print("job li")
+        else:
+            print("mosaic li")
