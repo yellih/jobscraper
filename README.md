@@ -7,6 +7,10 @@ weworkremotely는 홈페이지 UI가 자주 바뀌에서 DOM(css selector)가 �
 
 indeed는 봇을 막는 기능이 있어 requests의 get으로 url에 접속하여 추출하지 못 하므로 Selenium을 써서 브라우저가 열리는 방식으로 동작하게 함
 
+selenium의 브라우저가 자동으로 닫히기 때문에 Service와 ChromeDriverManager를 import함
+
+selenium의 브라우저를 열어놓을 필요 없이 자동으로 닫힌 상태에서도 추출이 되긴 하지만, 브라우저가 자동으로 닫히는채로 두고 작동하면 데이터 추출이 되지 않을 때 봇 막는 페이지가 작동해서 안되는 건지 뭔지 확인할 수가 없기 때문에 브라우저가 닫히지 않게 함
+
 weworkremotely 스크린샷 1 (2023.06.03)
 ![screencapture-weworkremotely-remote-jobs-search-2023-06-03-12_49_01](https://github.com/yellih/jobscraper/assets/127484092/147b03ad-d1fa-40a5-bf38-aa4ea06f99e5)
 
