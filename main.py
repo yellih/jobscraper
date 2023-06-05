@@ -23,44 +23,50 @@ def get_page_count(keyword):
         if pagination == None:
             return 1
         pages = pagination.find_all("div", class_="css-tvvxwd")
-        print(len(pages))
+        count = len(pages)
+        if count >= 5:
+            return 5
+        else:
+            count
 
-get_page_count("python")        
+# print(get_page_count("python"))   
 
 def extract_indeed_jobs(keyword):
-    home_url = "https://kr.indeed.com"
-    search_url = "https://kr.indeed.com/jobs?q="
-    if get(f"{search_url}{keyword}").status_code == 200:
-        print("Request Success!")
-    else:
-        results = []
-        browser.get(f"{search_url}{search_term}")
-        soup = BeautifulSoup(browser.page_source, "html.parser")
-        if soup.find("ul", class_="jobsearch-ResultsList") == None:
-            print("Traffic alert is working, You need to wait")
+    pages = get_page_count(keyword)
+    for page in range(pages):
+        home_url = "https://kr.indeed.com"
+        search_url = "https://kr.indeed.com/jobs?q="
+        if get(f"{search_url}{keyword}").status_code == 200:
+            print("Request Success!")
         else:
-            job_list = soup.find("ul", class_="jobsearch-ResultsList")
-            # print(job_list)
-            jobs = job_list.find_all("li", recursive=False)
-            # print(len(jobs))
-            for job in jobs:
-                zone = job.find("div",class_="mosaic-zone")
-                if zone == None:
-                    anchor = job.select_one("h2 a")
-                    # print(anchor)
-                    # print("//")
-                    title = anchor['aria-label']
-                    link = anchor['href']
-                    # print(title, link)
-                    # print("//")
-                    company = job.find("span", class_="companyName")
-                    location = job.find("div", class_="companyLocation")
-                    job_data = {
-                        'link':home_url+link,
-                        'company': company.string,
-                        'location': location.string,
-                        'position': title
-                    }
-                    results.append(job_data)
-            for result in results:
-                print(result, "\n//\n//")
+            results = []
+            browser.get(f"{search_url}{keyword}")
+            soup = BeautifulSoup(browser.page_source, "html.parser")
+            if soup.find("ul", class_="jobsearch-ResultsList") == None:
+                print("Traffic alert is working, You need to wait")
+            else:
+                job_list = soup.find("ul", class_="jobsearch-ResultsList")
+                # print(job_list)
+                jobs = job_list.find_all("li", recursive=False)
+                # print(len(jobs))
+                for job in jobs:
+                    zone = job.find("div",class_="mosaic-zone")
+                    if zone == None:
+                        anchor = job.select_one("h2 a")
+                        # print(anchor)
+                        # print("//")
+                        title = anchor['aria-label']
+                        link = anchor['href']
+                        # print(title, link)
+                        # print("//")
+                        company = job.find("span", class_="companyName")
+                        location = job.find("div", class_="companyLocation")
+                        job_data = {
+                            'link':home_url+link,
+                            'company': company.string,
+                            'location': location.string,
+                            'position': title
+                        }
+                        results.append(job_data)
+                for result in results:
+                    print(result, "\n//\n//")
