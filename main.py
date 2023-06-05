@@ -33,14 +33,17 @@ def get_page_count(keyword):
 
 def extract_indeed_jobs(keyword):
     pages = get_page_count(keyword)
+    print("Found",pages,"pages")
+    results = []
     for page in range(pages):
         home_url = "https://kr.indeed.com"
-        search_url = "https://kr.indeed.com/jobs?q="
-        if get(f"{search_url}{keyword}").status_code == 200:
+        search_url = "https://kr.indeed.com/jobs"
+        final_url = f"{search_url}?q={keyword}&start={page*10}"
+        print("Requesting", final_url)
+        if get(final_url).status_code == 200:
             print("Request Success!")
         else:
-            results = []
-            browser.get(f"{search_url}{keyword}")
+            browser.get(final_url)
             soup = BeautifulSoup(browser.page_source, "html.parser")
             if soup.find("ul", class_="jobsearch-ResultsList") == None:
                 print("Traffic alert is working, You need to wait")
@@ -65,8 +68,13 @@ def extract_indeed_jobs(keyword):
                             'link':home_url+link,
                             'company': company.string,
                             'location': location.string,
-                            'position': title
+                            'position': title.strip("의 전체 세부 정보")
                         }
                         results.append(job_data)
-                for result in results:
-                    print(result, "\n//\n//")
+                # for result in results:
+                #     print(result, "\n//\n//")
+    return results
+
+jobs = extract_indeed_jobs("python")
+
+print(jobs)
