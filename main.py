@@ -10,6 +10,11 @@ jobs = indeed + wwr
 
 # print(jobs)
 
+file = open(f"{keyword}.csv", "w")
+file.write("Position,Company,Location,URL\n")
+
 for job in jobs:
-    print(job)
-    print("//\n//")
+    file.write(f"{job['position']},{job['company']},{job['location']},{job['link']}\n")
+
+file.close()
+
