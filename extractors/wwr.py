@@ -52,9 +52,9 @@ def extract_wwr_jobs(keyword):
                 title = anchor.find('span', class_='title')
                 job_data = {
                     'link':home_url+link,
-                    'company': company.string,
-                    'location': location.string,
-                    'position': title.string
+                    'company': company.string.replace(",",""),
+                    'location': location.string.replace(",",""),
+                    'position': title.string.replace(",","")
                 }
                 results.append(job_data)
         # print(results)

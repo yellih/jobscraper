@@ -66,9 +66,9 @@ def extract_indeed_jobs(keyword):
                         location = job.find("div", class_="companyLocation")
                         job_data = {
                             'link':home_url+link,
-                            'company': company.string,
-                            'location': location.string,
-                            'position': title.strip("의 전체 세부 정보")
+                            'company': company.string.replace(",",""),
+                            'location': location.string.replace(",",""),
+                            'position': title.strip("의 전체 세부 정보").replace(",","")
                         }
                         results.append(job_data)
                 # for result in results:
