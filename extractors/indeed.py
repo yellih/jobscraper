@@ -68,7 +68,7 @@ def extract_indeed_jobs(keyword):
                             'link':home_url+link,
                             'company': company.string.replace(",",""),
                             'location': location.string.replace(",",""),
-                            'position': title.strip("의 전체 세부 정보").replace(",","")
+                            'position': title
                         }
                         results.append(job_data)
                 # for result in results:
