@@ -8,13 +8,19 @@ app = Flask("JobScrapper")
 def home():
     return render_template("home.html", name="user")
 
+db = {}
+
 @app.route("/search")
 def search():
     # print(request.args)
     keyword = request.args.get("keyword")
-    indeed = extract_indeed_jobs(keyword)
-    wwr = extract_wwr_jobs(keyword)
-    jobs = indeed + wwr
+    if keyword in db:
+        jobs = db[keyword]
+    else:   
+        indeed = extract_indeed_jobs(keyword)
+        wwr = extract_wwr_jobs(keyword)
+        jobs = indeed + wwr
+        db[keyword] = jobs
     return render_template("search.html", keyword=keyword, jobs=jobs )
 
 app.run("0.0.0.0")
