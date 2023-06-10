@@ -35,4 +35,8 @@ def export():
     save_to_file(keyword,db[keyword])
     return send_file(f"{keyword}.csv", as_attachment=True)
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+
 app.run("0.0.0.0")
