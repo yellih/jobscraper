@@ -31,7 +31,7 @@ def export():
     keyword = request.args.get("keyword")
     if keyword == None:
         return redirect("/")
-    if keyword is not db:
+    if keyword not in db:
         redirect(f"/search?keyword={keyword}")
     save_to_file(keyword, db[keyword])
     return send_file(f"{keyword}.csv", as_attachment=True)
