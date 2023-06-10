@@ -23,6 +23,13 @@ def search():
         wwr = extract_wwr_jobs(keyword)
         jobs = indeed + wwr
         db[keyword] = jobs
-    return render_template("search.html", keyword=keyword, jobs=jobs )
+    return render_template("search.html", keyword=keyword, jobs=jobs)
 
+@app.route("/export")
+def export():
+    keyword = request.args.get("keyword")
+    if keyword == None:
+        return redirect("/")
+    if keyword is not db:
+        redirect(f"/search?keyword={keyword}")
 app.run("0.0.0.0")
