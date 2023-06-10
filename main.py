@@ -10,4 +10,8 @@ def home():
 def hello():
     return 'hello you!'
 
+@app.route("/search")
+def search():
+    return render_template("search.html")
+
 app.run("0.0.0.0")
