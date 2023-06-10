@@ -7,7 +7,7 @@ app = Flask("JobScrapper")
 
 @app.route("/")
 def home():
-    return render_template("home.html", name="user")
+    return render_template("home.html", name="User")
 
 db = {}
 
